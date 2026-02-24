@@ -10,7 +10,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:3000",
-      "https://musicgpt-assessment.vercel.app/",
+      "https://musicgpt-assessment.vercel.app",
     ],
   },
 });
