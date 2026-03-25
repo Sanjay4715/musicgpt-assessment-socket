@@ -1,10 +1,12 @@
+import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import { v4 } from "uuid";
 import { files, STATUS_TYPE, thumbnails, versions } from "./constants/index.js";
 import { generateSongTitle, getRandomItem } from "./common/index.js";
 
-const server = http.createServer();
+const app = express();
+const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
@@ -123,6 +125,12 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(4000, () => {
-  console.log("Socket server running on http://localhost:4000");
+app.get("/", (req, res) => {
+  res.send("Socket server is running 🚀");
+});
+
+const PORT = process.env.PORT || 4000;
+
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
